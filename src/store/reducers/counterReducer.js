@@ -1,19 +1,19 @@
-import { INCREMENT, DECREMENT } from '../types';
+import {INCREMENT, DECREMENT} from '../actions/types';
 
 const initialState = {
   value: 0,
 };
 
-export const counter = (state = initialState, action) => {
+const counter = (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT:
-      return { ...state, value: state.value + action.payload };
+      return {...state, value: state.value + action.payload};
     case DECREMENT:
-      return { ...state, value: state.value - action.payload };
+      return {...state, value: state.value - action.payload};
     default:
       return state;
   }
 };
 
-export const increaseСounterAction = (number) => ({ type: INCREMENT, payload: number });
-export const decreaseCounterAction = (number) => ({ type: DECREMENT, payload: number });
+export default counter;
+

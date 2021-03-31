@@ -1,30 +1,100 @@
+import React from 'react';
 import CurrencyFlag from 'react-currency-flags';
-import { useDispatch, useSelector } from 'react-redux';
-import { decreaseCounterAction, increaseСounterAction } from './store/reducers/counterReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {deleteCurrencyPair, fetchCurrenciesPairs, fetchCurrencyList} from "./store/actions/currencyAction";
 
-function App() {
+import './app.css';
+
+const App = () => {
+  // React.useEffect(() => {
+  //   dispatch(fetchCurrencyList())
+  // }, []);
+
   const dispatch = useDispatch();
-  const value = useSelector(({ counter }) => counter.value);
+  const {listCurrencyPairs, listCurrencies} = useSelector(({currencyStore}) => currencyStore);
 
-  const increaseСounter = (number) => {
-    dispatch(increaseСounterAction(number));
+  const [firstCurr, setFirstCurr] = React.useState({});
+  const handleFirstCurr = (event) => {
+    console.log(event.target.value);
+    setFirstCurr(listCurrencies[event.target.value]);
   };
 
-  const decreaseCounter = (number) => {
-    dispatch(decreaseCounterAction(number));
+  const [secondCurr, setSecondCurr] = React.useState({});
+  const handleSecondCurr = (event) => {
+    setSecondCurr(listCurrencies[event.target.value]);
   };
 
   return (
     <div className="App">
-      <CurrencyFlag currency="EUR" size="xl" />
-      <h1>Hello, World!</h1>
-      <div style={{ textAlign: 'center' }}>
-        <button onClick={() => increaseСounter(Number(prompt()))}>inc</button>
-        <span style={{ fontSize: '2vmax', margin: '0 20px' }}>{value}</span>
-        <button onClick={() => decreaseCounter(Number(prompt()))}>dec</button>
+      <div className="container">
+        <div>
+          <div>
+            <div>
+              <h3>Добавить валютную пару</h3>
+              <select
+                value={listCurrencies.find(currency => currency.id === firstCurr)}
+                onChange={handleFirstCurr}
+              >
+                {listCurrencies.map((currency, index) => (
+                  <option
+                    key={currency.id}
+                    value={index}
+                  >
+                    {currency.id}
+                  </option>
+                ))
+                }
+              </select>
+              <select
+                value={listCurrencies.find(currency => currency.id === secondCurr)}
+                onChange={handleSecondCurr}
+              >
+                {listCurrencies.map((currency, index) => (
+                  <option
+                    key={currency.id}
+                    value={index}
+                  >
+                    {currency.id}
+                  </option>
+                ))
+                }
+              </select>
+              <button onClick={() => dispatch(fetchCurrenciesPairs(firstCurr.id, secondCurr.id))}>
+                Добавить
+              </button>
+            </div>
+          </div>
+          <ul style={{display: 'flex', justifyContent: 'space-evenly'}}>
+            {listCurrencyPairs && listCurrencyPairs.map((item) => (
+              <li
+                key={item.id}
+                style={{textAlign: 'center', border: '1px solid black'}}
+              >
+                <div>
+                  <CurrencyFlag
+                    currency={item.fr}
+                    size="md"
+                  />
+                  <span>{item.fr}</span>
+                  <CurrencyFlag currency={item.to} size="md"/>
+                  <span>{item.to}</span>
+                </div>
+                <div>
+                  <span>{item.val.toPrecision(2)}</span>
+                </div>
+                <div>
+                  <button onClick={() => dispatch(deleteCurrencyPair(item.id))}>
+                    Delete
+                  </button>
+                </div>
+              </li>
+            ))
+            }
+          </ul>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default App;
