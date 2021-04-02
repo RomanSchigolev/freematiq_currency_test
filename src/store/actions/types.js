@@ -2,6 +2,6 @@ export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
 
 // export const SET_CURRENCIES = 'SET_CURRENCIES';
-export const DELETE_PAIR = 'DELETE_PAIR';
-export const ADD_PAIR = 'ADD_PAIR';
-export const CURRENCY_SET = 'CURRENCY_SET';
+export const DELETE_CURRENCY_PAIR = 'DELETE_CURRENCY_PAIR';
+export const ADD_CURRENCY_PAIR = 'ADD_CURRENCY_PAIR';
+export const GET_CURRENCIES = 'GET_CURRENCIES';

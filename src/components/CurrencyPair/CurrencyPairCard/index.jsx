@@ -1,13 +1,14 @@
 import React from 'react';
-import { deleteCurrencyPair } from '../../store/actions/currencyAction';
 import { useDispatch } from 'react-redux';
+
+import { deleteCurrencyPair } from '../../../store/actions/currencyAction';
 
 import { Close } from '@material-ui/icons';
 import CurrencyFlag from 'react-currency-flags';
 
 import styles from './CurrencyPairCard.module.scss';
 
-const CurrencyPairCard = ({ id, fr: base, to: quoted, val: rate }) => {
+function CurrencyPairCard({ id, fr: base, to: quoted, val: rate }) {
   const dispatch = useDispatch();
   const formatRate = (rate) => {
     return rate > 1 ? rate.toFixed(2) : rate.toPrecision(2);
@@ -37,6 +38,6 @@ const CurrencyPairCard = ({ id, fr: base, to: quoted, val: rate }) => {
       </button>
     </li>
   );
-};
+}
 
 export default CurrencyPairCard;

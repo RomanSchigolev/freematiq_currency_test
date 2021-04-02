@@ -4,10 +4,9 @@ import CurrencyPairCard from '../CurrencyPairCard';
 
 import styles from './CurrencyPairList.module.scss';
 
-const CurrencyPairList = ({ cards }) => {
+const CurrencyPairList = React.memo(function CurrencyPairList({ cards }) {
   return (
     <div>
-      {' '}
       {cards.length ? (
         <ul className={styles.currency_pairs_list}>
           {cards.map((card) => (
@@ -19,6 +18,6 @@ const CurrencyPairList = ({ cards }) => {
       )}
     </div>
   );
-};
+});
 
 export default CurrencyPairList;

@@ -1,7 +1,8 @@
 .section {
   display: grid;
   padding: 10px;
-  row-gap: 20px;
+  grid-row-gap: 20px;
+  flex-grow: 1;
 
   &_title {
     font-size: 35px;

@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { ADD_PAIR, DELETE_PAIR, CURRENCY_SET } from './types';
+import { ADD_CURRENCY_PAIR, DELETE_CURRENCY_PAIR, GET_CURRENCIES } from './types';
 
-export const fetchCurrenciesPairs = (pair = 'USD_RUB,EUR_RUB') => {
+export const fetchCurrencyPair = (pair = 'USD_RUB,EUR_RUB') => {
   return async (dispatch) => {
     try {
       const response = await axios.get(process.env.REACT_APP_API_CONVERT_URL, {
@@ -42,22 +42,17 @@ export const fetchCurrencyList = () => {
   };
 };
 
-// export const setCurrencyPair = (data) => ({
-//   type: SET_CURRENCIES,
-//   payload: data
-// });
-
 export const deleteCurrencyPair = (index) => ({
-  type: DELETE_PAIR,
+  type: DELETE_CURRENCY_PAIR,
   payload: index,
 });
 
 export const addCurrencyPair = (currencyPair) => ({
-  type: ADD_PAIR,
+  type: ADD_CURRENCY_PAIR,
   payload: currencyPair,
 });
 
 export const setListCurrencies = (currencies) => ({
-  type: CURRENCY_SET,
+  type: GET_CURRENCIES,
   payload: currencies,
 });

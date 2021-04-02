@@ -1,0 +1,10 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  grid-gap: 20px;
+
+  &_title {
+    font-size: 35px;
+  }
+}
