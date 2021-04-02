@@ -1,8 +1,7 @@
 import React from 'react';
-import { Close } from '@material-ui/icons/';
-import CurrencyFlag from 'react-currency-flags';
 import { useDispatch, useSelector } from 'react-redux';
 // import {deleteCurrencyPair, fetchCurrenciesPairs, fetchCurrencyList} from "./store/actions/currencyAction";
+import CurrencyPairSection from './components/CurrencyPairSection';
 
 import './styles/app.scss';
 
@@ -27,102 +26,8 @@ const App = () => {
   return (
     <div className="app">
       <div className="container">
-        <div className="container__divider">
-          <div className="currencyPairsWidget">
-            <h2 className="currencyPairsWidget__title">Курс валютных пар</h2>
-            <ul className="currencyPairsWidget__listing">
-              <li className="currencyPairsWidget__item">
-                <div className="currencyPairsWidget__pair">
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="USD" size="md" />
-                    <span className="currencyPairsWidget__currency-label">USD</span>
-                  </div>
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="RUB" size="md" />
-                    <span className="currencyPairsWidget__currency-label">RUB</span>
-                  </div>
-                </div>
-                <div className="currencyPairsWidget__value">
-                  <span>75.98</span>
-                </div>
-                <button className="currencyPairsWidget__remove-pair">
-                  <Close color="secondary" fontSize="small" />
-                </button>
-              </li>
-              <li className="currencyPairsWidget__item">
-                <div className="currencyPairsWidget__pair">
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="UAH" size="md" />
-                    <span className="currencyPairsWidget__currency-label">USD</span>
-                  </div>
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="RUB" size="md" />
-                    <span className="currencyPairsWidget__currency-label">RUB</span>
-                  </div>
-                </div>
-                <div className="currencyPairsWidget__value">
-                  <span>2.98</span>
-                </div>
-                <button className="currencyPairsWidget__remove-pair">
-                  <Close color="secondary" fontSize="small" />
-                </button>
-              </li>
-              <li className="currencyPairsWidget__item">
-                <div className="currencyPairsWidget__pair">
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="EUR" size="md" />
-                    <span className="currencyPairsWidget__currency-label">USD</span>
-                  </div>
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="RUB" size="md" />
-                    <span className="currencyPairsWidget__currency-label">RUB</span>
-                  </div>
-                </div>
-                <div className="currencyPairsWidget__value">
-                  <span>88.98</span>
-                </div>
-                <button className="currencyPairsWidget__remove-pair">
-                  <Close color="secondary" fontSize="small" />
-                </button>
-              </li>
-              <li className="currencyPairsWidget__item">
-                <div className="currencyPairsWidget__pair">
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="GBP" size="md" />
-                    <span className="currencyPairsWidget__currency-label">USD</span>
-                  </div>
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="RUB" size="md" />
-                    <span className="currencyPairsWidget__currency-label">RUB</span>
-                  </div>
-                </div>
-                <div className="currencyPairsWidget__value">
-                  <span>113</span>
-                </div>
-                <button className="currencyPairsWidget__remove-pair">
-                  <Close color="secondary" fontSize="small" />
-                </button>
-              </li>
-              <li className="currencyPairsWidget__item">
-                <div className="currencyPairsWidget__pair">
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="AUD" size="md" />
-                    <span className="currencyPairsWidget__currency-label">USD</span>
-                  </div>
-                  <div className="currencyPairsWidget__currency">
-                    <CurrencyFlag currency="KRW" size="md" />
-                    <span className="currencyPairsWidget__currency-label">RUB</span>
-                  </div>
-                </div>
-                <div className="currencyPairsWidget__value">
-                  <span>0.98</span>
-                </div>
-                <button className="currencyPairsWidget__remove-pair">
-                  <Close color="secondary" fontSize="small" />
-                </button>
-              </li>
-            </ul>
-          </div>
+        <div className="container__separator">
+          <CurrencyPairSection />
           <div className="currencyConverterWidget">
             <h2>two</h2>
           </div>

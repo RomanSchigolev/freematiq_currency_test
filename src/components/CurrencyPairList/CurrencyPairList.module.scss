@@ -1,0 +1,6 @@
+.currency_pairs_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+  grid-gap: 2vmax;
+  list-style: none;
+}

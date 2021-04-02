@@ -1,0 +1,58 @@
+.currency_pair_wrapper,
+.base_currency,
+.quoted_currency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.currency_pair_wrapper {
+  margin-bottom: 14px;
+}
+
+.base_currency::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 21px;
+  background-color: #424242;
+  transform: rotate(12deg);
+  margin: 0 9px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #dcdcdc;
+  border-radius: 10px;
+  box-shadow: 1px 0 5px 0px #969696;
+  padding: 20px;
+  color: #424242;
+  position: relative;
+}
+
+.currency_code {
+  margin-left: 3px;
+}
+
+.currency_pair_rate {
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.remove_currency_pair {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
