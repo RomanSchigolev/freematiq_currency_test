@@ -16,23 +16,23 @@ function CurrencyPairCard({ id, fr: base, to: quoted, val: rate }) {
 
   return (
     <li className={styles.card}>
-      <div className={styles.currency_pair_wrapper}>
-        <div className={styles.base_currency}>
+      <div className={styles.currencyPairWrapper}>
+        <div className={styles.baseCurrency}>
           <CurrencyFlag currency={base} size="md" />
           <span className={styles.currency_code}>{base}</span>
         </div>
-        <div className={styles.quoted_currency}>
+        <div className={styles.quotedCurrency}>
           <CurrencyFlag currency={quoted} size="md" />
-          <span className={styles.currency_code}>{quoted}</span>
+          <span className={styles.currencyCode}>{quoted}</span>
         </div>
       </div>
-      <div className={styles.currency_pair_rate}>
+      <div className={styles.currencyPairRate}>
         <span>{formatRate(rate)}</span>
       </div>
       <button
         type="button"
         aria-label="delete currency pair"
-        className={styles.remove_currency_pair}
+        className={styles.removeCurrencyPair}
         onClick={() => dispatch(deleteCurrencyPair(id))}>
         <Close color="secondary" fontSize="small" />
       </button>

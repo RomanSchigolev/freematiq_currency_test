@@ -34,29 +34,19 @@ const useStyles = makeStyles((theme) => ({
 const CurrencyConverterForm = React.memo(function CurrencyConverterForm({ currencies }) {
   const classes = useStyles();
 
-  const [firstCurrency, setFirstCurr] = React.useState('RUB');
-  const handleFirstCurr = (event) => {
-    setFirstCurr(event.target.value);
+  const [firstCurrency, setFirstCurrency] = React.useState('RUB');
+  const handleFirstCurrency = (event) => {
+    setFirstCurrency(event.target.value);
   };
 
-  const [secondCurrency, setSecondCurr] = React.useState('USD');
-  const handleSecondCurr = (event) => {
-    setSecondCurr(event.target.value);
+  const [secondCurrency, setSecondCurrency] = React.useState('USD');
+  const handleSecondCurrency = (event) => {
+    setSecondCurrency(event.target.value);
   };
 
   const [amount, setAmount] = React.useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = React.useState(true);
   const [exchangeRate, setExchangeRate] = React.useState();
-
-  let toAmount;
-  let fromAmount;
-  if (amountInFromCurrency) {
-    fromAmount = amount;
-    toAmount = amount * exchangeRate;
-  } else {
-    toAmount = amount;
-    fromAmount = amount / exchangeRate;
-  }
 
   React.useEffect(() => {
     fetch(
@@ -66,7 +56,7 @@ const CurrencyConverterForm = React.memo(function CurrencyConverterForm({ curren
       .then((data) => {
         setExchangeRate(data.results[`${firstCurrency}_${secondCurrency}`]['val']);
       });
-  });
+  }, [firstCurrency, secondCurrency]);
 
   const handleFromAmountChange = (event) => {
     setAmount(event.target.value);
@@ -78,15 +68,25 @@ const CurrencyConverterForm = React.memo(function CurrencyConverterForm({ curren
     setAmountInFromCurrency(false);
   };
 
+  let toAmount;
+  let fromAmount;
+  if (amountInFromCurrency) {
+    fromAmount = amount;
+    toAmount = amount * exchangeRate;
+  } else {
+    toAmount = amount;
+    fromAmount = amount / exchangeRate;
+  }
+
   return (
-    <div className={styles.form_container}>
-      <div className={styles.formFromCurrency}>
+    <div className={styles.formContainer}>
+      <div className={styles.formInputBox}>
         <FormControl className={classes.formControl}>
           <TextField type="number" label="Сумма" value={fromAmount} onChange={handleFromAmountChange} />
         </FormControl>
         <FormControl className={classes.formControl}>
           <InputLabel className={classes.selectLabel}>Валюта</InputLabel>
-          <Select value={firstCurrency} onChange={handleFirstCurr}>
+          <Select value={firstCurrency} onChange={handleFirstCurrency}>
             {currencies.map((currency) => (
               <MenuItem key={currency.id} value={currency.id}>
                 <CurrencyFlag currency={currency.id} size="md" className={classes.currencyFlag} />
@@ -96,13 +96,13 @@ const CurrencyConverterForm = React.memo(function CurrencyConverterForm({ curren
           </Select>
         </FormControl>
       </div>
-      <div className={styles.formToCurrency}>
+      <div className={styles.formInputBox}>
         <FormControl className={classes.formControl}>
           <TextField type="number" label="Сумма" value={toAmount} onChange={handleToAmountChange} />
         </FormControl>
         <FormControl className={classes.formControl}>
           <InputLabel className={classes.selectLabel}>Валюта</InputLabel>
-          <Select value={secondCurrency} onChange={handleSecondCurr}>
+          <Select value={secondCurrency} onChange={handleSecondCurrency}>
             {currencies.map((currency) => (
               <MenuItem key={currency.id} value={currency.id}>
                 <CurrencyFlag currency={currency.id} size="md" className={classes.currencyFlag} />

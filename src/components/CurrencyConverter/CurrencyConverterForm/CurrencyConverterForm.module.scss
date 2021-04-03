@@ -1,11 +1,10 @@
-.form_container {
+.formContainer {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.formFromCurrency,
-.formToCurrency {
+.formInputBox {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;

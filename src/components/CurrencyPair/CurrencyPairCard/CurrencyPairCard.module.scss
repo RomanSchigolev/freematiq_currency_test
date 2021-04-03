@@ -1,16 +1,16 @@
-.currency_pair_wrapper,
-.base_currency,
-.quoted_currency {
+.currencyPairWrapper,
+.baseCurrency,
+.quotedCurrency {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.currency_pair_wrapper {
+.currencyPairWrapper {
   margin-bottom: 14px;
 }
 
-.base_currency::after {
+.baseCurrency::after {
   content: '';
   display: block;
   width: 1px;
@@ -33,16 +33,16 @@
   position: relative;
 }
 
-.currency_code {
+.currencyCode {
   margin-left: 3px;
 }
 
-.currency_pair_rate {
+.currencyPairRate {
   font-weight: 500;
   font-size: 22px;
 }
 
-.remove_currency_pair {
+.removeCurrencyPair {
   position: absolute;
   top: 2px;
   right: 1px;

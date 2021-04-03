@@ -8,7 +8,7 @@ const CurrencyPairList = React.memo(function CurrencyPairList({ cards }) {
   return (
     <div>
       {cards.length ? (
-        <ul className={styles.currency_pairs_list}>
+        <ul className={styles.currencyPairsList}>
           {cards.map((card) => (
             <CurrencyPairCard key={card.id} {...card} />
           ))}

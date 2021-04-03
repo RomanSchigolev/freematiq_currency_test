@@ -19,7 +19,7 @@ const App = () => {
   return (
     <div className="app">
       <div className="container">
-        <div className="container__separator">
+        <div className="containerSeparator">
           <CurrencyPairSection currencies={listCurrencies} cards={listCurrencyPairs} />
           <CurrencyConverterSection currencies={listCurrencies} />
         </div>
