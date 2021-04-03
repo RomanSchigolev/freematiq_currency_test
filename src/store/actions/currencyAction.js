@@ -1,3 +1,5 @@
+// API - https://free.currencyconverterapi.com/
+
 import axios from 'axios';
 import { ADD_CURRENCY_PAIR, DELETE_CURRENCY_PAIR, GET_CURRENCIES } from './types';
 
@@ -7,7 +9,7 @@ export const fetchCurrencyPair = (pair = 'USD_RUB,EUR_RUB') => {
       const response = await axios.get(process.env.REACT_APP_API_CONVERT_URL, {
         params: {
           apiKey: process.env.REACT_APP_API_KEY,
-          q: `${pair}`,
+          q: pair,
         },
       });
       const objectSourceCurrencyPair = response.data.results;
