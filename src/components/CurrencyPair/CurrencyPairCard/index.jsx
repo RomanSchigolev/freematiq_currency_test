@@ -19,7 +19,7 @@ function CurrencyPairCard({ id, fr: base, to: quoted, val: rate }) {
       <div className={styles.currencyPairWrapper}>
         <div className={styles.baseCurrency}>
           <CurrencyFlag currency={base} size="md" />
-          <span className={styles.currency_code}>{base}</span>
+          <span className={styles.currencyCode}>{base}</span>
         </div>
         <div className={styles.quotedCurrency}>
           <CurrencyFlag currency={quoted} size="md" />
