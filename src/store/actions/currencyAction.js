@@ -37,6 +37,7 @@ export const fetchCurrencyList = () => {
       for (let key in objectSourceCurrencies) {
         listCurrencies.push(objectSourceCurrencies[key]);
       }
+      listCurrencies.sort((a, b) => (a.id > b.id ? 1 : -1));
       dispatch(setListCurrencies(listCurrencies));
     } catch (error) {
       throw error;

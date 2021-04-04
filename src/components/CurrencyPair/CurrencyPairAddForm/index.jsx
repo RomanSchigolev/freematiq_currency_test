@@ -24,9 +24,6 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
-  selectLabel: {
-    fontSize: 14,
-  },
   buttonForm: {
     alignSelf: 'flex-start',
     textTransform: 'none',
