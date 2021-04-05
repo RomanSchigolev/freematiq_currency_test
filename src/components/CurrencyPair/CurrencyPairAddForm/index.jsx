@@ -11,7 +11,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import { AddCircle } from '@material-ui/icons/';
 import CurrencyFlag from 'react-currency-flags';
 
-import { fetchCurrencyPair } from '../../../store/actions/currencyAction';
+import { fetchNewCurrencyPair } from '../../../store/actions/currencyAction';
 
 import styles from './CurrencyPairAddForm.module.scss';
 
@@ -36,27 +36,41 @@ const useStyles = makeStyles((theme) => ({
 const CurrencyPairAddForm = React.memo(function CurrencyPairAddForm({ currencies }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { listCurrencyPairs } = useSelector(({ currencyStore }) => currencyStore);
 
-  const [firstCurrency, setFirstCurrency] = React.useState('');
+  const [currencyPair, setCurrencyPair] = React.useState({
+    fr: '',
+    to: '',
+  });
+
   const handleFirstCurrency = (event) => {
-    setFirstCurrency(event.target.value);
+    setCurrencyPair({ ...currencyPair, fr: event.target.value });
   };
 
-  const [secondCurrency, setSecondCurrency] = React.useState('');
   const handleSecondCurrency = (event) => {
-    setSecondCurrency(event.target.value);
+    setCurrencyPair({ ...currencyPair, to: event.target.value });
   };
 
-  const [error, setError] = React.useState(false);
+  const [errorWithEmptySelectors, setErrorWithEmptySelectors] = React.useState(false);
+  const [errorWhenAddingExistingPair, setErrorWhenAddingExistingPair] = React.useState(false);
+
+  const isErrorWhenAddingExistingPair = (listing, pair) => {
+    return listing.some((item) => item.fr === pair.fr && item.to === pair.to);
+  };
 
   const handleClickAddPair = () => {
-    if (firstCurrency && secondCurrency) {
-      dispatch(fetchCurrencyPair(`${firstCurrency}_${secondCurrency}`));
-      setFirstCurrency('');
-      setSecondCurrency('');
-      setError(false);
+    if (currencyPair.fr !== '' && currencyPair.to !== '') {
+      if (isErrorWhenAddingExistingPair(listCurrencyPairs, currencyPair)) {
+        setErrorWhenAddingExistingPair(true);
+      } else {
+        dispatch(fetchNewCurrencyPair(currencyPair));
+        currencyPair.fr = '';
+        currencyPair.to = '';
+        setErrorWithEmptySelectors(false);
+        setErrorWhenAddingExistingPair(false);
+      }
     } else {
-      setError(true);
+      setErrorWithEmptySelectors(true);
     }
   };
 
@@ -64,7 +78,7 @@ const CurrencyPairAddForm = React.memo(function CurrencyPairAddForm({ currencies
     <div className={styles.formContainer}>
       <FormControl className={classes.formControlPair}>
         <InputLabel className={classes.selectLabel}>Базовая валюта</InputLabel>
-        <Select value={firstCurrency} onChange={handleFirstCurrency}>
+        <Select value={currencyPair.fr} onChange={handleFirstCurrency} onOpen={() => setErrorWithEmptySelectors(false)}>
           {currencies.map((currency) => (
             <MenuItem key={currency.id} value={currency.id}>
               <CurrencyFlag currency={currency.id} size="md" className={classes.currencyFlag} />
@@ -72,11 +86,14 @@ const CurrencyPairAddForm = React.memo(function CurrencyPairAddForm({ currencies
             </MenuItem>
           ))}
         </Select>
-        {error ? <FormHelperText error={true}>Выберите валюту</FormHelperText> : ''}
+        {errorWithEmptySelectors ? <FormHelperText error={true}>Выберите валюту</FormHelperText> : ''}
       </FormControl>
       <FormControl className={classes.formControlPair}>
         <InputLabel className={classes.selectLabel}>Котируемая валюта</InputLabel>
-        <Select value={secondCurrency} onChange={handleSecondCurrency}>
+        <Select
+          value={currencyPair.to}
+          onChange={handleSecondCurrency}
+          onOpen={() => setErrorWithEmptySelectors(false)}>
           {currencies.map((currency) => (
             <MenuItem key={currency.id} value={currency.id}>
               <CurrencyFlag currency={currency.id} size="md" className={classes.currencyFlag} />
@@ -84,7 +101,7 @@ const CurrencyPairAddForm = React.memo(function CurrencyPairAddForm({ currencies
             </MenuItem>
           ))}
         </Select>
-        {error ? <FormHelperText error={true}>Выберите валюту</FormHelperText> : ''}
+        {errorWithEmptySelectors ? <FormHelperText error={true}>Выберите валюту</FormHelperText> : ''}
       </FormControl>
       <Button
         variant="contained"
@@ -94,6 +111,7 @@ const CurrencyPairAddForm = React.memo(function CurrencyPairAddForm({ currencies
         onClick={handleClickAddPair}>
         Добавить пару
       </Button>
+      {errorWhenAddingExistingPair ? <FormHelperText error={true}>Такая валютная пара уже есть.</FormHelperText> : ''}
     </div>
   );
 });

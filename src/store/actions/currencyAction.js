@@ -3,21 +3,27 @@
 import axios from 'axios';
 import { ADD_CURRENCY_PAIR, DELETE_CURRENCY_PAIR, GET_CURRENCIES } from './types';
 
-export const fetchCurrencyPair = (pair) => {
+export const addDefaultCurrencyPair = (pair) => {
+  return (dispatch) => {
+    dispatch(addCurrencyPairToStore(pair));
+  };
+};
+
+export const fetchNewCurrencyPair = (pair) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(process.env.REACT_APP_API_CONVERT_URL, {
         params: {
           apiKey: process.env.REACT_APP_API_KEY,
-          q: pair,
+          q: `${pair.fr}_${pair.to}`,
         },
       });
-      const objectSourceCurrencyPair = response.data.results;
+      const objectCurrencyPair = response.data.results;
       const listCurrencyPairs = [];
-      for (let key in objectSourceCurrencyPair) {
-        listCurrencyPairs.push(objectSourceCurrencyPair[key]);
+      for (let key in objectCurrencyPair) {
+        listCurrencyPairs.push({ ...objectCurrencyPair[key], isDefaultPair: false });
       }
-      dispatch(addCurrencyPair(...listCurrencyPairs));
+      dispatch(addCurrencyPairToStore(...listCurrencyPairs));
     } catch (error) {
       throw error;
     }
@@ -50,7 +56,7 @@ export const deleteCurrencyPair = (index) => ({
   payload: index,
 });
 
-export const addCurrencyPair = (currencyPair) => ({
+export const addCurrencyPairToStore = (currencyPair) => ({
   type: ADD_CURRENCY_PAIR,
   payload: currencyPair,
 });

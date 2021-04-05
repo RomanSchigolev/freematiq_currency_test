@@ -22,10 +22,6 @@ const currencyStore = (state = initialState, action) => {
         ...state,
         listCurrencyPairs: [...state.listCurrencyPairs, action.payload],
       };
-    // return {
-    //   ...state,
-    //   listCurrencyPairs: [...state.listCurrencyPairs, ...action.payload],
-    // };
     default:
       return state;
   }
