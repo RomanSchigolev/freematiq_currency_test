@@ -66,7 +66,6 @@ const CurrencyPairAddForm = React.memo(function CurrencyPairAddForm({ currencies
         dispatch(fetchNewCurrencyPair(currencyPair));
         currencyPair.fr = '';
         currencyPair.to = '';
-        setErrorWithEmptySelectors(false);
         setErrorWhenAddingExistingPair(false);
       }
     } else {
