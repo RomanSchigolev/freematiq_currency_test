@@ -20,8 +20,12 @@ const currencyStore = (state = initialState, action) => {
     case ADD_CURRENCY_PAIR:
       return {
         ...state,
-        listCurrencyPairs: [...state.listCurrencyPairs, ...action.payload],
+        listCurrencyPairs: [...state.listCurrencyPairs, action.payload],
       };
+    // return {
+    //   ...state,
+    //   listCurrencyPairs: [...state.listCurrencyPairs, ...action.payload],
+    // };
     default:
       return state;
   }

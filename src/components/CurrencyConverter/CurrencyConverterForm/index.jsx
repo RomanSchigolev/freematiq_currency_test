@@ -43,7 +43,7 @@ const CurrencyConverterForm = React.memo(function CurrencyConverterForm({ curren
 
   const [amount, setAmount] = React.useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = React.useState(true);
-  const [exchangeRate, setExchangeRate] = React.useState();
+  const [exchangeRate, setExchangeRate] = React.useState('');
 
   React.useEffect(() => {
     fetch(

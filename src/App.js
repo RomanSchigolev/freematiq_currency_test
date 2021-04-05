@@ -11,7 +11,8 @@ import './styles/app.scss';
 const App = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(fetchCurrencyPair());
+    dispatch(fetchCurrencyPair('USD_RUB'));
+    dispatch(fetchCurrencyPair('EUR_RUB'));
     dispatch(fetchCurrencyList());
   }, []);
   const { listCurrencyPairs, listCurrencies } = useSelector(({ currencyStore }) => currencyStore);
