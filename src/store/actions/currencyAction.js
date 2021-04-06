@@ -12,9 +12,9 @@ export const addDefaultCurrencyPair = (pair) => {
 export const fetchNewCurrencyPair = (pair) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(process.env.REACT_APP_API_CONVERT_URL, {
+      const response = await axios.get('https://free.currconv.com/api/v7/convert', {
         params: {
-          apiKey: process.env.REACT_APP_API_KEY,
+          apiKey: '7b6c24ab30c7c034783a',
           q: `${pair.fr}_${pair.to}`,
         },
       });
@@ -33,9 +33,9 @@ export const fetchNewCurrencyPair = (pair) => {
 export const fetchCurrencyList = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(process.env.REACT_APP_API_CURRENCIES_URL, {
+      const response = await axios.get('https://free.currconv.com/api/v7/currencies', {
         params: {
-          apiKey: process.env.REACT_APP_API_KEY,
+          apiKey: '7b6c24ab30c7c034783a',
         },
       });
       const objectSourceCurrencies = response.data.results;

@@ -46,9 +46,7 @@ const CurrencyConverterForm = React.memo(function CurrencyConverterForm({ curren
   const [exchangeRate, setExchangeRate] = React.useState('');
 
   React.useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_API_CONVERT_URL}?apiKey=${process.env.REACT_APP_API_KEY}&q=${firstCurrency}_${secondCurrency}`
-    )
+    fetch(`https://free.currconv.com/api/v7/convert?apiKey=7b6c24ab30c7c034783a&q=${firstCurrency}_${secondCurrency}`)
       .then((res) => res.json())
       .then((data) => {
         setExchangeRate(data.results[`${firstCurrency}_${secondCurrency}`]['val']);

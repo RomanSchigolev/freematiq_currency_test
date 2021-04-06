@@ -11,7 +11,7 @@ import './styles/app.scss';
 const App = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_CONVERT_URL}?apiKey=${process.env.REACT_APP_API_KEY}&q=USD_RUB,EUR_RUB`)
+    fetch(`https://free.currconv.com/api/v7/convert?apiKey=7b6c24ab30c7c034783a&q=USD_RUB,EUR_RUB`)
       .then((res) => res.json())
       .then((data) => {
         const objectDefaultCurrencyPair = data.results;
